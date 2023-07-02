@@ -2,6 +2,17 @@ const userRouter = require("express").Router();
 const User = require('../models/user.model')
 
 
+userRouter.get('/', async (req, res) => {
+    try{
+        const user = await User.find();
+        console.log(user)
+        res.status(200).json({user})
+    }
+    catch(error){
+        res.status(404).json({message: error})
+    }
+})
+
 userRouter.post('/register', async (req, res) => {
     try{
         const {name, email, password} = req.body;
