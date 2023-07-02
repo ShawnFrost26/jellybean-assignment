@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv")
+const userRouter = require('./routes/user.route')
 
 dotenv.config()
 
@@ -12,6 +13,10 @@ mongoose.connect(MONGO_URL)
 .catch(err=>console.log(err))
 
 const app = express();
+app.use(express.json());
+
+app.use("/users", userRouter);
+
 
 
 app.listen(PORT, ()=>{
