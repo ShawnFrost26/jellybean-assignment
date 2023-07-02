@@ -1,5 +1,7 @@
 const userRouter = require("express").Router();
 const User = require('../models/user.model')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
 userRouter.get('/', async (req, res) => {
@@ -16,8 +18,14 @@ userRouter.get('/', async (req, res) => {
 userRouter.post('/register', async (req, res) => {
     try{
         const {name, email, password} = req.body;
-        const newUser = await User.create({name, email, password})
-        res.status(200).json({message: "user registered sucessfully", user:newUser})
+        if(name && email && password){
+            const hashedPassword = await bcrypt.hash(password, 10)
+            const newUser = await User.create({name, email, password: hashedPassword})
+            res.status(200).json({message: "user registered sucessfully", user:newUser})
+        }
+        else{
+            res.status(400).json({message: "required fields missing"})
+        }
     }
     catch(error){
         res.status(400).json({message: error})
@@ -39,5 +47,6 @@ userRouter.post('/login', async (req, res) => {
         res.status(400).json({message: error})
     }
 })
+
 
 module.exports = userRouter;
