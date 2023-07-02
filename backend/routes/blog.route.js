@@ -5,7 +5,7 @@ const response = (res, status, result) => {
     res.status(status).json(result);
 }
 
-BlogRouter.get("/", async (req, res) => {
+blogRouter.get("/", async (req, res) => {
       try {
         const blogs = await Blog.find();
         response(res, 200, blogs);
@@ -15,6 +15,16 @@ BlogRouter.get("/", async (req, res) => {
     }
 ) 
 
+blogRouter.post("/create", async (req, res) => {
+    try {
+      const { title, author, content } = req.body;
+      const newBlog = new Blog({ title, author, content });
+      const result = await newBlog.save();
+      response(res, 201, { message: "Blog created successfully", blog: result });
+    } catch (error) {
+      response(res, 500, { message: "Failed to create new blog", error });
+    }
+  });
 
 
 module.exports = blogRouter;
