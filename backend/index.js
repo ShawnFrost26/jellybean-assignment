@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv")
 const userRouter = require('./routes/user.route')
+const blogRouter = require('./routes/blog.route')
+
 
 dotenv.config()
 
@@ -16,7 +18,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/users", userRouter);
-
+app.use("/blogs", blogRouter);
 
 
 app.listen(PORT, ()=>{
