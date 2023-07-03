@@ -1,9 +1,9 @@
 import React from 'react'
-import BlogCard from '../components/BlogCard'
+import DisplayBlog from '../components/DisplayBlog'
 
 const HomePage = () => {
   return (
-    <div><BlogCard/></div>
+    <div><DisplayBlog/></div>
   )
 }
 
