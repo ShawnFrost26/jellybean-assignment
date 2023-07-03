@@ -3,6 +3,7 @@ const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+dotenv.config()
 
 const secret = process.env.JWT_SECRET;
 
@@ -54,7 +55,7 @@ userRouter.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ id: user._id }, "secret");
+    const token = jwt.sign({ id: user._id }, secret);
 
     res.status(201).json({ message: "User logged in successfully", token });
   } catch (error) {
