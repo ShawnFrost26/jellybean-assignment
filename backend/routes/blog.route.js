@@ -19,7 +19,7 @@ blogRouter.get("/", async (req, res) => {
 blogRouter.post("/create", getAuth, async (req, res) => {
   try {
     const { title, author, content } = req.body;
-    const newBlog = new Blog({ title, author, content, user: req.user});
+    const newBlog = new Blog({ title, author, content, user: req.userId});
     // console.log("newBlog:", newBlog);
     const result = await newBlog.save();
     response(res, 201, { message: "Blog created successfully", blog: result });
@@ -30,7 +30,7 @@ blogRouter.post("/create", getAuth, async (req, res) => {
 
   blogRouter.delete("/delete/:id", getAuth, async (req, res)=>{
     try {
-        const blog = await Blog.findOneAndDelete({user: req.user, _id: req.params.id})
+        const blog = await Blog.findOneAndDelete({user: req.userId, _id: req.params.id})
         console.log(blog)
         if(!blog){
             return response(res, 404, {error: "blog not found"})
