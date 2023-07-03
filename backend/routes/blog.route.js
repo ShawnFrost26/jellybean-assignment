@@ -31,7 +31,7 @@ blogRouter.post("/create", getAuth, async (req, res) => {
   blogRouter.delete("/delete/:id", getAuth, async (req, res)=>{
     try {
         const blog = await Blog.findOneAndDelete({user: req.userId, _id: req.params.id})
-        console.log(blog)
+        // console.log(blog)
         if(!blog){
             return response(res, 404, {error: "blog not found"})
         }
@@ -40,5 +40,16 @@ blogRouter.post("/create", getAuth, async (req, res) => {
         response(res, 400, { error: error })
     }
 })
+blogRouter.get("/:id", getAuth, async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return response(res, 404, { error: "Blog not found" });
+    }
+    response(res, 200, { blog });
+  } catch (error) {
+    response(res, 500, { error: "Failed to fetch blog" });
+  }
+});
 
 module.exports = blogRouter;
