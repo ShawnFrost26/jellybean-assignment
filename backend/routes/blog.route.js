@@ -20,9 +20,8 @@ blogRouter.post("/create", getAuth, async (req, res) => {
   try {
     const { title, author, content } = req.body;
     const newBlog = new Blog({ title, author, content });
-    console.log("newBlog:", newBlog);
+    console.log("newBlog:", newBlog, req.user);
     const result = await newBlog.save();
-    console.log("result:", result);
     response(res, 201, { message: "Blog created successfully", blog: result });
 } catch (error) {
     response(res, 500, { message: "Failed to create new blog", error });

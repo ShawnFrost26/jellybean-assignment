@@ -17,6 +17,12 @@ try {
     if(!verifyToken){
         return res.status(401).json({error: "unauthorized"})
     }
+    const user = await User.findById(verifyToken.id);
+    if (!user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    req.userId = verifyToken.id
+    req.user = user;
     next();
 } catch (error) {
     res.status(401).json({error: "Unauthorized"})
