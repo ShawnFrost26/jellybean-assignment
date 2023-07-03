@@ -20,7 +20,7 @@ blogRouter.post("/create", getAuth, async (req, res) => {
   try {
     const { title, author, content } = req.body;
     const newBlog = new Blog({ title, author, content, user: req.user});
-    console.log("newBlog:", newBlog);
+    // console.log("newBlog:", newBlog);
     const result = await newBlog.save();
     response(res, 201, { message: "Blog created successfully", blog: result });
 } catch (error) {
@@ -28,5 +28,17 @@ blogRouter.post("/create", getAuth, async (req, res) => {
 }
   });
 
+  blogRouter.delete("/delete/:id", getAuth, async (req, res)=>{
+    try {
+        const blog = await Blog.findOneAndDelete({user: req.user, _id: req.params.id})
+        console.log(blog)
+        if(!blog){
+            return response(res, 404, {error: "blog not found"})
+        }
+        response(res, 200, {message: "blog deleted!"})
+    } catch (error) {
+        response(res, 400, { error: error })
+    }
+})
 
 module.exports = blogRouter;
