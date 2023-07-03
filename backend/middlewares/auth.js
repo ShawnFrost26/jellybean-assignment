@@ -8,12 +8,12 @@ const secret = process.env.JWT_SECRET
 const getAuth = async (req, res, next) => {
 try {
     const token = req.headers.token
-    console.log("token::", token);
+    // console.log("token::", token);
     if(!token){
         return res.status(401).json({error: "unauthorized"})
     }
     const verifyToken = jwt.verify(token, secret)
-    console.log("Decoded Token:", verifyToken);
+    // console.log("Decoded Token:", verifyToken);
     if(!verifyToken){
         return res.status(401).json({error: "unauthorized"})
     }
