@@ -1,11 +1,10 @@
-import * as React from 'react';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { IconButton } from '@mui/material';
+import * as React from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-
-export default function Actions() {
+export default function Actions({id}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -14,17 +13,25 @@ export default function Actions() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleUpdate = () => {
+    console.log(id);
+    handleClose();
+  };
+  const handleDelete = () => {
+    console.log(id);
+    handleClose();
+  };
 
   return (
     <div>
       <IconButton
         id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
+        aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
+        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <MoreVertIcon/>
+        <MoreVertIcon />
       </IconButton>
       <Menu
         id="basic-menu"
@@ -32,11 +39,23 @@ export default function Actions() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Update</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem
+          onClick={() => 
+            handleUpdate()
+          }
+        >
+          Update
+        </MenuItem>
+        <MenuItem
+          onClick={() => 
+            handleDelete()
+          }
+        >
+          Delete
+        </MenuItem>
       </Menu>
     </div>
   );

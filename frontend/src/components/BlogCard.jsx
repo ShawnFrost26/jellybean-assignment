@@ -15,12 +15,12 @@ export default function BlogCard({ blog }) {
     <Card sx={{ maxWidth: 345 }} id={_id}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="blog">
             {author[0].name.slice(0, 1)}
           </Avatar>
         }
         action={
-          <Actions/>
+          <Actions id={_id}/>
         }
         title={title}
         subheader={new Date(createdAt).toDateString()}
