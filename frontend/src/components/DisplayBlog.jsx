@@ -1,34 +1,33 @@
-import { Box } from '@mui/material'
-import BlogCard from './BlogCard'
+import React from "react";
+import BlogCard from "./BlogCard";
+
+const dummyBlogs = [
+  {
+    _id: "1",
+    title: "First Blog",
+    content: "This is the content of the first blog.",
+    image: "https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?size=626&ext=jpg&ga=GA1.2.549498061.1687595530&semt=sph",
+    author: [{ name: "Shawn Doe" }],
+    createdAt: "2023-07-03T10:00:00.000Z",
+  },
+  {
+    _id: "2",
+    title: "Second Blog",
+    content: "This is the content of the second blog.",
+    image: "https://img.freepik.com/free-photo/miniature-engineer-worker-plug-lan-cable-computer_1252-838.jpg?size=626&ext=jpg&ga=GA1.2.549498061.1687595530&semt=sph",
+    author: [{ name: "Mo Smith" }],
+    createdAt: "2023-07-02T14:30:00.000Z",
+  },
+];
 
 const DisplayBlog = () => {
+  return (
+    <div style={{ maxWidth: "600px", margin: "auto", paddingTop: "2rem" }}>
+      {dummyBlogs.map((blog) => (
+        <BlogCard key={blog._id} blog={blog} />
+      ))}
+    </div>
+  );
+};
 
-    const dummyBlogs = [
-        {
-          _id: 1,
-          title: "Dummy Blog 1",
-          content: "This is the content of dummy blog 1.",
-          image: "https://example.com/image1.jpg",
-          author: "John Doe",
-          timestamp: "2023-07-03 10:00:00"
-        },
-        {
-          _id: 2,
-          title: "Dummy Blog 2",
-          content: "This is the content of dummy blog 2.",
-          image: "https://example.com/image2.jpg",
-          author: "Jane Smith",
-          timestamp: "2023-07-03 11:00:00"
-        },
-      ];
-
-    return (
-        <Box sx={{ maxWidth: "600px", display: "flex", flexDirection: "column", margin: "auto", gap: 3, py:2 }}>
-            {dummyBlogs.map(blog=>(
-                <BlogCard blog={blog} key={blog._id} />
-            ))}
-        </Box>
-    )
-}
-
-export default DisplayBlog
+export default DisplayBlog;

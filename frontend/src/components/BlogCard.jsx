@@ -7,18 +7,17 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
-
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-export default function BlogCard(props) {
-  const { user, _id, title, content, image, author, timestamp } = props.blog;
+export default function BlogCard({ blog }) {
+  const { _id, title, content, image, author, createdAt } = blog;
 
   return (
     <Card sx={{ maxWidth: 345 }} id={_id}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="blog">
-            {author.slice(0, 1)}
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            {author[0].name.slice(0, 1)}
           </Avatar>
         }
         action={
@@ -27,9 +26,9 @@ export default function BlogCard(props) {
           </IconButton>
         }
         title={title}
-        subheader={timestamp}
+        subheader={new Date(createdAt).toDateString()}
       />
-      <CardMedia component="img" height="194" image={image} alt={user} />
+      <CardMedia component="img" height="194" image={image} alt="Blog Image" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {content}
