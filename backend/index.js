@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv")
+const cors = require('cors')
 const userRouter = require('./routes/user.route')
 const blogRouter = require('./routes/blog.route')
 
@@ -16,6 +17,7 @@ mongoose.connect(MONGO_URL)
 
 const app = express();
 app.use(express.json());
+app.use(cors({Credential:true}))
 
 app.use("/users", userRouter);
 app.use("/blogs", blogRouter);
