@@ -33,7 +33,9 @@ const Navbar = () => {
             {isLargeScreen ? (
               <>
                 <Button>
-                  <Link style={{ color: "#fff", textDecoration: "none" }}>
+                  <Link style={{ color: "#fff", textDecoration: "none" }}
+                   to={"/"}
+                  >
                     Home
                   </Link>
                 </Button>
